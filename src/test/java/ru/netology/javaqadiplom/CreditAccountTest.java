@@ -17,4 +17,28 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(3_000, account.getBalance());
     }
+
+    @Test
+    public void shouldCreateCreditAccountPositive() {
+        CreditAccount account = new CreditAccount(
+                30,
+                200,
+                3
+        );
+
+        Assertions.assertEquals(30, account.getBalance());
+        Assertions.assertEquals(3, account.getRate());
+    }
+
+    @Test
+    public void shouldThrowIllegalArgumentExceptionWhenRateNegative() {
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            CreditAccount account = new CreditAccount(
+                    500,
+                    10_000,
+                    -10
+            );
+        });
+    }
 }

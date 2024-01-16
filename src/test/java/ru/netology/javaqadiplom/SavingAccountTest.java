@@ -35,6 +35,20 @@ public class SavingAccountTest {
             );
         });
     }
+    @Test
+    public void shouldThrowIllegalArgumentExceptionWhenSavingRateNull() {
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            SavingAccount account = new SavingAccount(
+                    1000,
+                    200,
+                    10000,
+                    0
+
+
+            );
+        });
+    }
 
     @Test
     public void FalseWhenAccountNullAfterPay() {
@@ -61,6 +75,17 @@ public class SavingAccountTest {
 
         boolean actual = account.pay(200);
 
+        Assertions.assertFalse(actual);
+    }
+    @Test
+    public void FalseWhenAccountZeroBalaceAfterPay() {
+        SavingAccount account = new SavingAccount(
+                100,
+                100,
+                500,
+                15);
+
+        boolean actual = account.pay(100);
 
         Assertions.assertFalse(actual);
 
@@ -97,7 +122,7 @@ public class SavingAccountTest {
     }
 
     @Test
-    public void FalseWhenAccountNullAfterAdd() {
+    public void FalseWhenAccountAddZero() {
         SavingAccount account = new SavingAccount(
                 200,
                 100,
@@ -105,6 +130,20 @@ public class SavingAccountTest {
                 15);
 
         boolean actual = account.add(0);
+
+
+        Assertions.assertFalse(actual);
+
+    }
+    @Test
+    public void FalseWhenAccountAddOverMaxBalance() {
+        SavingAccount account = new SavingAccount(
+                200,
+                100,
+                500,
+                15);
+
+        boolean actual = account.add(600);
 
 
         Assertions.assertFalse(actual);

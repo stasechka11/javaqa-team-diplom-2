@@ -31,6 +31,18 @@ public class CreditAccountTest {
     }
 
     @Test
+    public void shouldThrowIllegalArgumentExceptionWhenInitialBalanceNegative() {
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            CreditAccount account = new CreditAccount(
+                    -7_000,
+                    28_000,
+                    9
+            );
+        });
+    }
+
+    @Test
     public void shouldThrowIllegalArgumentExceptionWhenCreditLimitNegative() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {

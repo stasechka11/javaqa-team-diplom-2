@@ -49,6 +49,105 @@ public class SavingAccountTest {
             );
         });
     }
+    @Test
+    public void shouldThrowIllegalArgumentExceptionWhenSavingMinBalanceNegative() {
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            SavingAccount account = new SavingAccount(
+                    1000,
+                    -200,
+                    10000,
+                    15
+
+
+            );
+        });
+    }
+    @Test
+    public void shouldThrowIllegalArgumentExceptionWhenSavingInitBalanceNull() {
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            SavingAccount account = new SavingAccount(
+                    0,
+                    1000,
+                    10000,
+                    15
+
+
+            );
+        });
+    }
+    @Test
+    public void shouldThrowIllegalArgumentExceptionWhenSavingInitBalanceNegative() {
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            SavingAccount account = new SavingAccount(
+                    -100,
+                    200,
+                    10000,
+                    15
+
+
+            );
+        });
+    }
+    @Test
+    public void shouldThrowIllegalArgumentExceptionWhenSavingMinBalanceOverMaxBalance() {
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            SavingAccount account = new SavingAccount(
+                    1_000,
+                    20_000,
+                    9000,
+                    15
+
+
+            );
+        });
+    }
+    @Test
+    public void shouldThrowIllegalArgumentExceptionWhenSavingMinBalanceNull() {
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            SavingAccount account = new SavingAccount(
+                    1000,
+                    0,
+                    10000,
+                    15
+
+
+            );
+        });
+    }
+    @Test
+    public void shouldThrowIllegalArgumentExceptionWhenSavingMaxBalanceNegative() {
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            SavingAccount account = new SavingAccount(
+                    100,
+                    100,
+                    -100,
+                    15
+
+
+            );
+        });
+    }
+    @Test
+    public void shouldThrowIllegalArgumentExceptionWhenSavingMaxBalanceNull() {
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            SavingAccount account = new SavingAccount(
+                    1000,
+                    1000,
+                    0,
+                    15
+
+
+            );
+        });
+    }
+
 
     @Test
     public void FalseWhenAccountNullAfterPay() {
@@ -178,6 +277,36 @@ public class SavingAccountTest {
 
         Assertions.assertEquals(30,actual );
 
+    }
+    @Test
+    public void shouldReturnNullYearChangeWhenBalanceNull() {
+        SavingAccount account = new SavingAccount(
+                0,
+                100,
+                3500,
+                15
+        );
+
+        int expected = 0;
+        int actual = account.yearChange();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldCountYearChangeWhenBalanceNegative() {
+        SavingAccount account = new SavingAccount(
+                -100,
+                100,
+                3500,
+                15
+        );
+
+
+        int expected = -15;
+        int actual = account.yearChange();
+
+        Assertions.assertEquals(expected, actual);
     }
 
 

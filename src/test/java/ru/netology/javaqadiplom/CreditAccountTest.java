@@ -174,4 +174,88 @@ public class CreditAccountTest {
         Assertions.assertFalse(account.pay(0));
         Assertions.assertEquals(8_900, account.getBalance());
     }
+
+    @Test
+    public void shouldReturnTrueWhenAddToNullBalance() {
+        CreditAccount account = new CreditAccount(
+                0,
+                200_000,
+                4
+        );
+
+        Assertions.assertTrue(account.add(500));
+        Assertions.assertEquals(500, account.getBalance());
+    }
+
+    @Test
+    public void shouldReturnTrueWhenAddToPositiveBalance() {
+        CreditAccount account = new CreditAccount(
+                7_000,
+                100_000,
+                8
+        );
+
+        Assertions.assertTrue(account.add(1_000));
+        Assertions.assertEquals(8_000, account.getBalance());
+    }
+
+    @Test
+    public void shouldReturnTrueWhenAddToNegativeBalanceTotalPositive() {
+        CreditAccount account = new CreditAccount(
+                -900,
+                10_000,
+                3
+        );
+
+        Assertions.assertTrue(account.add(1_900));
+        Assertions.assertEquals(1_000, account.getBalance());
+    }
+
+    @Test
+    public void shouldReturnTrueWhenAddToNegativeBalanceTotalNegative() {
+        CreditAccount account = new CreditAccount(
+                -4_000,
+                10_000,
+                3
+        );
+
+        Assertions.assertTrue(account.add(2_000));
+        Assertions.assertEquals(-2_000, account.getBalance());
+    }
+
+    @Test
+    public void shouldReturnTrueWhenAddToNegativeBalanceTotalNull() {
+        CreditAccount account = new CreditAccount(
+                -9_999,
+                10_000,
+                3
+        );
+
+        Assertions.assertTrue(account.add(9_999));
+        Assertions.assertEquals(0, account.getBalance());
+    }
+
+    @Test
+    public void shouldReturnFalseWhenAddNegativeAmount() {
+        CreditAccount account = new CreditAccount(
+                500,
+                10_000,
+                3
+        );
+
+        Assertions.assertFalse(account.add(-200));
+        Assertions.assertEquals(500, account.getBalance());
+    }
+
+    @Test
+    public void shouldReturnFalseWhenAddNullAmount() {
+        CreditAccount account = new CreditAccount(
+                -1_500,
+                20_000,
+                7
+        );
+
+        Assertions.assertFalse(account.add(0));
+        Assertions.assertEquals(-1_500, account.getBalance());
+    }
 }

@@ -140,6 +140,18 @@ public class CreditAccountTest {
     }
 
     @Test
+    public void shouldReturnFalseWhenTotalBalanceEqualsCreditLimit() {
+        CreditAccount account = new CreditAccount(
+                0,
+                500_000,
+                13
+        );
+
+        Assertions.assertTrue(account.pay(500_000));
+        Assertions.assertEquals(-500_000, account.getBalance());
+    }
+
+    @Test
     public void shouldReturnFalseWhenPayAmountNegative() {
         CreditAccount account = new CreditAccount(
                 200,

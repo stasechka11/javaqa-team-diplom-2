@@ -258,4 +258,32 @@ public class CreditAccountTest {
         Assertions.assertFalse(account.add(0));
         Assertions.assertEquals(-1_500, account.getBalance());
     }
+
+    @Test
+    public void shouldReturnNullYearChangeWhenBalancePositive() {
+        CreditAccount account = new CreditAccount(
+                600,
+                1_000,
+                10
+        );
+
+        int expected = 0;
+        int actual = account.yearChange();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldReturnNullYearChangeWhenBalanceNull() {
+        CreditAccount account = new CreditAccount(
+                0,
+                11_000,
+                23
+        );
+
+        int expected = 0;
+        int actual = account.yearChange();
+
+        Assertions.assertEquals(expected, actual);
+    }
 }

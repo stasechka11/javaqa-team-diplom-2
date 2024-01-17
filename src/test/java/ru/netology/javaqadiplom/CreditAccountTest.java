@@ -92,7 +92,7 @@ public class CreditAccountTest {
     }
 
     @Test
-    public void shouldReturnTrueWhenTotalBalancePositiveLessThanCreditLimit() {
+    public void shouldPayReturnTrueWhenTotalBalancePositiveLessThanCreditLimit() {
         CreditAccount account = new CreditAccount(
                 3_000,
                 5_000,
@@ -104,7 +104,7 @@ public class CreditAccountTest {
     }
 
     @Test
-    public void shouldReturnTrueWhenTotalBalanceNegativeLessThanCreditLimit() {
+    public void shouldPayReturnTrueWhenTotalBalanceNegativeLessThanCreditLimit() {
         CreditAccount account = new CreditAccount(
                 1_000,
                 2_000,
@@ -116,7 +116,7 @@ public class CreditAccountTest {
     }
 
     @Test
-    public void shouldReturnTrueWhenTotalBalanceNull() {
+    public void shouldPayReturnTrueWhenTotalBalanceNull() {
         CreditAccount account = new CreditAccount(
                 150,
                 2_000,
@@ -128,7 +128,7 @@ public class CreditAccountTest {
     }
 
     @Test
-    public void shouldReturnFalseWhenTotalBalanceGreaterThanCreditLimit() {
+    public void shouldPayReturnFalseWhenTotalBalanceGreaterThanCreditLimit() {
         CreditAccount account = new CreditAccount(
                 500,
                 1_000,
@@ -140,7 +140,7 @@ public class CreditAccountTest {
     }
 
     @Test
-    public void shouldReturnFalseWhenTotalBalanceEqualsCreditLimit() {
+    public void shouldPayReturnFalseWhenTotalBalanceEqualsCreditLimit() {
         CreditAccount account = new CreditAccount(
                 0,
                 500_000,

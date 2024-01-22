@@ -18,6 +18,7 @@ public class CreditAccountTest {
         Assertions.assertEquals(3_000, account.getBalance());
     }
 
+    // Создание CreditAccount с корректными параметрами
     @Test
     public void shouldCreateCreditAccountPositive() {
         CreditAccount account = new CreditAccount(
@@ -31,6 +32,12 @@ public class CreditAccountTest {
         Assertions.assertEquals(3, account.getRate());
     }
 
+    /* Тесты на выбрасывание исключения при недопустимых значениях параметров:
+     * 1. initialBalance < 0
+     * 2. creditLimit < 0
+     * 3. creditLimit = 0
+     * 4. rate < 0
+     * 5. rate = 0 */
     @Test
     public void shouldThrowIllegalArgumentExceptionWhenInitialBalanceNegative() {
 
@@ -91,6 +98,14 @@ public class CreditAccountTest {
         });
     }
 
+    /*Тесты на метод Pay:
+     * 1. Возвращает true, баланс изменяется - balance > 0 после оплаты
+     * 2. Возвращает true, баланс изменяется - balance < 0, balance < creditLimit после оплаты
+     * 3. Возвращает true, баланс изменяется - balance = 0 после оплаты
+     * 4. Возвращает false, баланс не изменяется - balance < 0, balance > creditLimit после оплаты
+     * 5. Возвращает true, баланс изменяется - balance < 0, balance = creditLimit после оплаты
+     * 6. Возвращает false, баланс не изменяется - pay amount < 0
+     * 7. Возвращает false, баланс не изменяется - pay amount = 0 */
     @Test
     public void shouldPayReturnTrueWhenTotalBalancePositiveLessThanCreditLimit() {
         CreditAccount account = new CreditAccount(
@@ -140,7 +155,7 @@ public class CreditAccountTest {
     }
 
     @Test
-    public void shouldPayReturnFalseWhenTotalBalanceEqualsCreditLimit() {
+    public void shouldPayReturnTrueWhenTotalBalanceEqualsCreditLimit() {
         CreditAccount account = new CreditAccount(
                 0,
                 500_000,
@@ -175,6 +190,14 @@ public class CreditAccountTest {
         Assertions.assertEquals(8_900, account.getBalance());
     }
 
+    /* Тесты на метод add:
+     * 1. Возвращает true, баланс увеличивается - initialBalance = 0
+     * 2. Возвращает true, баланс увеличивается - initialBalance > 0
+     * 3. Возвращает true, баланс увеличивается - initialBalance < 0, totalBalance > 0
+     * 4. Возвращает true, баланс увеличивается - initialBalance < 0, totalBalance < 0
+     * 5. Возвращает true, баланс увеличивается - initialBalance < 0, totalBalance = 0
+     * 6. Возвращает false, баланс не изменяется - add amount < 0
+     * 7. Возвращает false, баланс не изменяется - add amount = 0 */
     @Test
     public void shouldReturnTrueWhenAddToNullBalance() {
         CreditAccount account = new CreditAccount(
@@ -259,6 +282,10 @@ public class CreditAccountTest {
         Assertions.assertEquals(-1_500, account.getBalance());
     }
 
+    /* Тесты на метод yearChange:
+    * 1. Возвращает 0, balance > 0
+    * 2. Возвращает 0, balance = 0
+    * 3. Возвращает процент согласно rate, balance < 0 */
     @Test
     public void shouldReturnNullYearChangeWhenBalancePositive() {
         CreditAccount account = new CreditAccount(

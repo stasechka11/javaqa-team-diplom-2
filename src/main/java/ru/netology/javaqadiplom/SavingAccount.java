@@ -19,12 +19,49 @@ public class SavingAccount extends Account {
      * @param maxBalance - максимальный баланс
      * @param rate - неотрицательное число, ставка в процентах годовых на остаток
      */
+
     public SavingAccount(int initialBalance, int minBalance, int maxBalance, int rate) {
-        if (rate < 0) {
+        if (rate <= 0) {
             throw new IllegalArgumentException(
-              "Накопительная ставка не может быть отрицательной, а у вас: " + rate
+                    "Накопительная ставка не может быть отрицательной или равной нулю, а у вас: " + rate
             );
         }
+
+        if (minBalance < 0) {
+            throw new IllegalArgumentException(
+                    "Минимальный баланс не может быть отрицательным, а у вас: " + minBalance
+            );
+        }
+
+        if (maxBalance <= 0) {
+            throw new IllegalArgumentException(
+                    "Максимальный баланс не может быть отрицательным или равным нулю, а у вас: " + maxBalance
+            );
+        }
+
+        if (minBalance >= maxBalance) {
+            throw new IllegalArgumentException(
+                    "Минимальный баланс не может быть больше или равным максимального баланса, а у вас: " + "\n" +
+                            "минимальный баланс: " + minBalance + "\n" +
+                            "максимальный баланс: " + maxBalance
+            );
+        }
+
+        if (initialBalance < 0) {
+            throw new IllegalArgumentException(
+                    "Начальный баланс не может быть отрицательным, а у вас: " + initialBalance
+            );
+        }
+
+        if (initialBalance < minBalance | initialBalance > maxBalance) {
+            throw new IllegalArgumentException(
+                    "Начальный баланс должен быть в пределах от указанного минимального до указанного максимального баланса включительно, а у вас: " + "\n" +
+                            "начальный баланс: " + initialBalance + "\n" +
+                            "минимальный баланс: " + minBalance + "\n" +
+                            "максимальный баланс: " + maxBalance
+            );
+        }
+
         this.balance = initialBalance;
         this.minBalance = minBalance;
         this.maxBalance = maxBalance;
@@ -40,13 +77,27 @@ public class SavingAccount extends Account {
      * @param amount - сумма покупки
      * @return true если операция прошла успешно, false иначе.
      */
-    @Override
+   /* @Override
     public boolean pay(int amount) {
         if (amount <= 0) {
             return false;
         }
         balance = balance - amount;
         if (balance > minBalance) {
+            return true;
+        } else {
+            return false;
+        }
+    }*/
+
+    @Override
+    public boolean pay(int amount) {
+        if (amount <= 0) {
+            return false;
+        }
+
+        if (balance - amount >= minBalance) {
+            balance = balance - amount;
             return true;
         } else {
             return false;
@@ -69,8 +120,8 @@ public class SavingAccount extends Account {
         if (amount <= 0) {
             return false;
         }
-        if (balance + amount < maxBalance) {
-            balance = amount;
+        if (balance + amount <= maxBalance) {
+            balance = balance + amount;
             return true;
         } else {
             return false;

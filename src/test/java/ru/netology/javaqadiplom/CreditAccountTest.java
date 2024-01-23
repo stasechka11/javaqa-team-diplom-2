@@ -237,10 +237,12 @@ public class CreditAccountTest {
     @Test
     public void shouldReturnTrueWhenAddToNegativeBalanceTotalNegative() {
         CreditAccount account = new CreditAccount(
-                -4_000,
+                0,
                 10_000,
                 3
         );
+
+        account.pay(4000);
 
         Assertions.assertTrue(account.add(2_000));
         Assertions.assertEquals(-2_000, account.getBalance());

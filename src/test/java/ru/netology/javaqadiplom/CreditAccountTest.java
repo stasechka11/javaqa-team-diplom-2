@@ -273,13 +273,13 @@ public class CreditAccountTest {
     @Test
     public void shouldReturnFalseWhenAddNullAmount() {
         CreditAccount account = new CreditAccount(
-                -1_500,
+                1_500,
                 20_000,
                 7
         );
 
         Assertions.assertFalse(account.add(0));
-        Assertions.assertEquals(-1_500, account.getBalance());
+        Assertions.assertEquals(1_500, account.getBalance());
     }
 
     /* Тесты на метод yearChange:

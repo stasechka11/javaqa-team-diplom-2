@@ -317,11 +317,12 @@ public class CreditAccountTest {
     @Test
     public void shouldCountYearChangeWhenBalanceNegative() {
         CreditAccount account = new CreditAccount(
-                -200,
+                0,
                 800,
                 15
         );
 
+        account.pay(200);
         int expected = -30;
         int actual = account.yearChange();
 

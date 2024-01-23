@@ -289,9 +289,9 @@ public class CreditAccountTest {
     }
 
     /* Тесты на метод yearChange:
-    * 1. Возвращает 0, balance > 0
-    * 2. Возвращает 0, balance = 0
-    * 3. Возвращает процент согласно rate, balance < 0 */
+     * 1. Возвращает 0, balance > 0
+     * 2. Возвращает 0, balance = 0
+     * 3. Возвращает процент согласно rate, balance < 0 */
     @Test
     public void shouldReturnNullYearChangeWhenBalancePositive() {
         CreditAccount account = new CreditAccount(
@@ -332,6 +332,21 @@ public class CreditAccountTest {
         int expected = -30;
         int actual = account.yearChange();
 
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldCountYearChangeWhenBalanceLessThan100() {
+        CreditAccount account = new CreditAccount(
+                0,
+                800,
+                80
+        );
+
+        account.pay(99);
+        int expected = -79;
+        int actual = account.yearChange();
+        System.out.println(actual);
         Assertions.assertEquals(expected, actual);
     }
 }
